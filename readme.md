@@ -72,8 +72,8 @@ internal/
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd Ringover_Assignment
+   git clone https://github.com/nilmani9430/GOLANG_ORDER_MATCHING_SYSTEM.git
+   cd GOLANG_ORDER_MATCHING_SYSTEM
    ```
 
 2. **Install dependencies**
