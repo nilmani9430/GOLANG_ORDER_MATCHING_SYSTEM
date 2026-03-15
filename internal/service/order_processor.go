@@ -160,7 +160,6 @@ func (p *OrderProcessor) worker(workerID int) {
 // queueMonitor monitors the order queue and logs statistics
 func (p *OrderProcessor) queueMonitor() {
 	defer p.wg.Done()
-	fmt.Println("Inside queueMonitor")
 	ticker := time.NewTicker(30 * time.Second)
 	defer ticker.Stop()
 
