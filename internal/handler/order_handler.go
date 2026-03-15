@@ -43,9 +43,7 @@ func (h *OrderHandler) PlaceOrder(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Process order
-	fmt.Println("calling placeOrder")
 	processedOrder, err := h.orderService.PlaceOrder(ctx, &order)
-	fmt.Println("returned from placeOrder")
 	if err != nil {
 		if domainErr, ok := domain.IsDomainError(err); ok {
 			h.logger.Logger.ErrorContext(ctx, "Domain error in place order", "error", err.Error())

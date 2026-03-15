@@ -116,7 +116,6 @@ func TimeoutMiddleware(timeout time.Duration) func(http.Handler) http.Handler {
 			done := make(chan struct{})
 
 			go func() {
-				// fmt.Println("Inside middleware Request completed normally")
 				next.ServeHTTP(w, r.WithContext(ctx))
 				close(done)
 			}()

@@ -45,12 +45,10 @@ func (s *OrderService) PlaceOrder(ctx context.Context, order *domain.Order) (*do
 	s.logger.LogOrderPlaced(ctx, order.ID, order.Symbol, string(order.Side), order.Quantity, order.Price)
 
 	// Process order matching
-	fmt.Println("calling processorder matching")
 	if err := s.processOrderMatching(ctx, order); err != nil {
 		s.logger.Logger.ErrorContext(ctx, "Failed to process order matching", "error", err.Error())
 		return nil, domain.ErrOrderProcessingFailed
 	}
-	fmt.Println("returned from processorder matching")
 
 	return order, nil
 }
@@ -145,12 +143,10 @@ func (s *OrderService) validateOrder(order *domain.Order) error {
 // processOrderMatching handles order matching logic
 func (s *OrderService) processOrderMatching(ctx context.Context, order *domain.Order) error {
 	// Get matching orders
-	fmt.Println("calling getmatchingorders")
 	matchingOrders, err := s.repo.GetMatchingOrders(ctx, order)
 	if err != nil {
 		return err
 	}
-	fmt.Println("returned from getmatchingorders")
 
 	//if len(matchingOrders) == 0 {
 	//	return nil // No matches found
@@ -165,8 +161,6 @@ func (s *OrderService) processMatches(ctx context.Context, order *domain.Order, 
 	var orderUpdates []domain.OrderUpdate
 	var trades []domain.Trade
 	var processingErrors []error
-
-	fmt.Println("Coming inside processMatches")
 
 	// Process matches sequentially to avoid race conditions
 	for _, match := range matchingOrders {
@@ -238,8 +232,6 @@ func (s *OrderService) processMatches(ctx context.Context, order *domain.Order, 
 			return err
 		}
 	}
-
-	fmt.Println("My order type is ", order.Type)
 
 	// Update the original order status
 	var orderStatus domain.OrderStatus
